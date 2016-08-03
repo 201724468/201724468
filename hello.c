@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int main(){
-	printf("hello, Open Source Programming\n");
+	printf("hello2, Open Source Programming\n");
 	return 0;
 }
 
