@@ -1,0 +1,80 @@
+#include <stdio.h>
+#include "student.h"
+
+int main(int argc, char* argv[])
+{
+	struct student record;
+	FILE *fp;
+
+	fp = fopen(argv[1], "wb");
+	
+	while(scanf("%d %s %d", &record.id, record.name, &record.score) == 3)
+		fwrite(&record, sizeof(record), 1, fp);
+
+	fclose(fp);
+	exit(0);
+}
+	
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char* argv[])
+{
+	struct student record;
+	FILE *fp;
+	fp = fopen(argv[1],"rb");
+	fp2 = fopen(argv[2],"wb");
+
+	while(fread(&record, sizeof(record), 1,fp)>0)
+		fwrite(&record, sizeof(record), 1, fp2);
+	fclose(fp);
+	fclose(fp2);
+	exit(0);
+}
+
+#include <stdio.h>
+#include "student.h"
+
+int main(int argc, char *argv[])
+{
+	struct student record;
+	FILE *fp;
+	fp = fopen(argv[1], "r");
+	while(fread(&record, sizeof(record), 1,fp)>0)
+		printf("%d %s %hd\n", record.id, record.name, record. score);
+
+	fclose(fp);
+	exit(0);
+}
+
+#include <stdio.h>
+#include "student.h"
+#define STARTID 1401001
+
+int main(int argc, char *argv[])
+{
+	struct student record;
+	FILE *fp;
+	char c;
+	int id;
+
+	do{
+		printf("Insert STudent ID: \n");
+		if(scanf("%d", &id)==1){
+			fseek(fp,(id - STARTID)*sizeof(record),SEEK_SET);
+			if((fread(&record,sizeof(record),1,fp)>0**record.id!=0))
+				printf("%d %7s %6hd\n", record.id, record.name, record.score);
+			else
+				printf("There is no %d record\n", id);
+			}
+		else
+			printf("Insert Error\n");
+
+		printf("Continue?");
+		scanf("%c", &c);
+	}while(c=='y');
+
+	fclose(fp);
+	return 0;
+}
